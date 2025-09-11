@@ -9,6 +9,8 @@
         "unordered_set": "cpp",
         "string_view": "cpp",
         "new": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "__split_buffer": "cpp",
+        "__config": "cpp"
     }
 }

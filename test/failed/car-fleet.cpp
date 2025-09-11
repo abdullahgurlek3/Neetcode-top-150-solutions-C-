@@ -13,6 +13,11 @@ class Solution
 public:
     static bool sp(Pair a, Pair b)
     {
+        if (a.pos == b.pos)
+        {
+            return b.pos - a.pos;
+        }
+
         return a.pos - b.pos < 0;
     }
     int carFleet(int target, vector<int> &position, vector<int> &speed)
@@ -23,7 +28,6 @@ public:
             pairs[i] = Pair{pos : position[i], speed : speed[i]};
         }
         sort(pairs.begin(), pairs.end(), sp);
-
         deep(&pairs);
 
         return 1;
@@ -31,12 +35,14 @@ public:
 
     void deep(vector<Pair> *pairs)
     {
-        for (int i = 1; i < pairs->size(); i++)
+        while (pairs->size()>0)
         {
-            cout << (*pairs)[i].pos << " " << (*pairs)[i].speed << endl;
-            if (((*pairs)[i].speed < (*pairs)[i - 1].speed) && (*pairs)[i].pos * (*pairs)[i-1].speed -(*pairs)[i].pos * (*pairs)[i-1].speed - )
-            {
-            }
+
+            Pair a=(*pairs).pop_back();
+            Pair b=(*pairs).pop_back();
+
+            int t = a.speed * b.pos - b.speed * a.pos / b.speed - a.speed;
+            cout << a.pos << " " << b.speed <<" x " << t << endl;
         }
     }
 };
