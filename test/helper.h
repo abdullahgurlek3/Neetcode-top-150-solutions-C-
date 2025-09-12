@@ -19,7 +19,7 @@ void print_matrix(vector<vector<T>> v)
     {
         for (int x = 0; x < v[y].size(); x++)
         {
-            cout << v[y][x]<<"\t";
+            cout << v[y][x] << "\t";
         }
         cout << endl;
     };
@@ -85,13 +85,13 @@ vector<vector<int>> &convertStrToMatrix(string str)
                     {
                         if (str[k] == ']')
                         {
-                            //cout << nm << endl;
+                            // cout << nm << endl;
                             v.push_back(stoi(nm));
                             break;
                         }
                         if (str[k] == ',')
                         {
-                           // cout << nm << endl;
+                            // cout << nm << endl;
                             v.push_back(stoi(nm));
                             nm = "";
                         }
@@ -107,3 +107,33 @@ vector<vector<int>> &convertStrToMatrix(string str)
     }
     return *r;
 }
+
+struct ListNode
+{
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(vector<int> v)
+    {
+        val = v[0];
+        ListNode *nextptr = this;
+        for (int i = 1; i < v.size(); i++)
+        {
+            nextptr->next = new ListNode(v[i]);
+            nextptr = nextptr->next;
+        }
+    }
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+    void print()
+    {
+        ListNode *local = this;
+        while (local)
+        {
+            cout << local->val << " ";
+            local = local->next;
+        }
+        cout << endl;
+    }
+
+};
