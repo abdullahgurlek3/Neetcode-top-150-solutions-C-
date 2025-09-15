@@ -16,21 +16,33 @@ public:
             slow = slow->next;
             fast = fast->next->next;
         }
-
-        while (slow)
+        ListNode *tail = NULL;
+        if (fast)
         {
-            s.top()->next = slow;
-            s.pop();
+            s.push(slow);
+        }
+        else
+        {
+            tail = new ListNode(slow->val);
+        }
+
+        slow = slow->next;
+        while (s.size() > 0)    
+        {
             ListNode *n = slow->next;
+            slow->next = tail;
+            s.top()->next = slow;
+            tail = s.top();
+            s.pop();
             slow = n;
         }
     };
 };
-// 1[2] 2[3] 3[4] 4[5]
+// 1[2] 2[3] 3[4] 4[5] 5[6]
 
 int main()
 {
-    vector<int> v = {1, 2, 3, 4, 5, 6};
+    vector<int> v = {1, 2, 3, 4, 5,6};
     ListNode listNode(v);
     Solution s;
     s.reorderList(&listNode);
