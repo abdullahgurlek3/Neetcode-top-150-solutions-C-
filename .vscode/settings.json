@@ -49,6 +49,7 @@
         "typeinfo": "cpp",
         "variant": "cpp",
         "memory": "cpp",
-        "complex": "cpp"
+        "complex": "cpp",
+        "sstream": "cpp"
     }
 }

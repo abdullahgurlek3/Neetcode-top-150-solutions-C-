@@ -57,37 +57,101 @@ public:
     // Encodes a tree to a single string.
     string serialize(TreeNode *root)
     {
-        deque<TreeNode*> q;
+        deque<TreeNode *> q;
+
         q.push_back(root);
 
-        string str="";
+        vector<string> strs;
 
-        while (q.size()>0)
+        while (q.size() > 0)
         {
-            
+            TreeNode *back = q.front();
+            q.pop_front();
+
+            if (back)
+            {
+                strs.push_back(to_string(back->val));
+                q.push_back(back->left);
+                q.push_back(back->right);
+            }
+            else
+            {
+                strs.push_back("-");
+            }
         }
-        
+
+        string str = "";
+        for (string x : strs)
+        {
+            str += x + ",";
+        }
+        return str.substr(0, str.size() - 1);
     }
 
-    // Decodes your encoded data to tree.
-    TreeNode *deserialize(string data)
+    TreeNode *
+    deserialize(string data)
     {
+        if (data == "-")
+        {
+            return nullptr;
+        }
 
-        
-        return nullptr;
+        int i = 0;
+        while (i < data.size() && data[i] != ',')
+            i++;
+        TreeNode *root = new TreeNode(stoi(data.substr(0, i)));
+        deque<TreeNode *> q;
+        q.push_back(root);
+        TreeNode *main = root;
+        i++;
+        while (i < data.size() && q.size() > 0)
+        {
+            root = q.front();
+            q.pop_front();
+            int start = i;
+            while (i < data.size() && data[i] != ',')
+                i++;
+
+            if (data.substr(start, i - start) != "-")
+            {
+                root->left = new TreeNode(stoi(data.substr(start, i - start)));
+                q.push_back(root->left);
+            }
+
+            if (i == data.size())
+                break;
+            i++;
+            start = i;
+
+            while (i < data.size() && data[i] != ',')
+                i++;
+            if (data.substr(start, i - start) != "-")
+            {
+                root->right = new TreeNode(stoi(data.substr(start, i - start)));
+                q.push_back(root->right);
+            }
+            i++;
+        }
+
+        return main;
     }
 };
+//    1
+//  2   3
+// 4 5 6 7
+//
 
+// 1 3 7 6 5 2 4
 int main()
 {
-    TreeNode *tree = new TreeNode(1);
-    tree->left = new TreeNode(2);
-    tree->right = new TreeNode(3);
+    TreeNode *tree = deserializeBFS("1,2,3,4,5,6,7,8");
 
     Codec c;
     string str = c.serialize(tree);
     cout << str << endl;
     TreeNode *sr = c.deserialize(str);
-    cout << sr->left->val << endl;
+    cout << sr << endl;
     cout << sr->right->val << endl;
+
+    tree->preorder();
 }

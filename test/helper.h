@@ -149,7 +149,7 @@ struct TreeNode
 public:
     static TreeNode *fromVector(vector<int> v)
     {
-        throw " not using ";   
+        throw " not using ";
     }
 
     void preorder()
@@ -165,5 +165,107 @@ public:
             cout << root->val << ", ";
             preorder(root->right);
         }
+    }
+};
+
+string serializeBFS(TreeNode *root)
+{
+    deque<TreeNode *> q;
+
+    q.push_back(root);
+
+    vector<string> strs;
+
+    while (q.size() > 0)
+    {
+        TreeNode *back = q.front();
+        q.pop_front();
+
+        if (back)
+        {
+            strs.push_back(to_string(back->val));
+            q.push_back(back->left);
+            q.push_back(back->right);
+        }
+        else
+        {
+            strs.push_back("-");
+        }
+    }
+
+    string str = "";
+    for (string x : strs)
+    {
+        str += x + ",";
+    }
+    return str.substr(0, str.size() - 1);
+}
+
+TreeNode *deserializeBFS(string data)
+{
+    if (data == "-")
+    {
+        return nullptr;
+    }
+
+    int i = 0;
+    while (i < data.size() && data[i] != ',')
+        i++;
+    TreeNode *root = new TreeNode(stoi(data.substr(0, i)));
+    deque<TreeNode *> q;
+    q.push_back(root);
+    TreeNode *main = root;
+    i++;
+    while (i < data.size() && q.size() > 0)
+    {
+        root = q.front();
+        q.pop_front();
+        int start = i;
+        while (i < data.size() && data[i] != ',')
+            i++;
+
+        if (data.substr(start, i - start) != "-")
+        {
+            root->left = new TreeNode(stoi(data.substr(start, i - start)));
+            q.push_back(root->left);
+        }
+
+        if (i == data.size())
+            break;
+        i++;
+        start = i;
+
+        while (i < data.size() && data[i] != ',')
+            i++;
+        if (data.substr(start, i - start) != "-")
+        {
+            root->right = new TreeNode(stoi(data.substr(start, i - start)));
+            q.push_back(root->right);
+        }
+        i++;
+    }
+
+    return main;
+}
+
+class Node
+{
+public:
+    int val;
+    vector<Node *> neighbors;
+    Node()
+    {
+        val = 0;
+        neighbors = vector<Node *>();
+    }
+    Node(int _val)
+    {
+        val = _val;
+        neighbors = vector<Node *>();
+    }
+    Node(int _val, vector<Node *> _neighbors)
+    {
+        val = _val;
+        neighbors = _neighbors;
     }
 };
