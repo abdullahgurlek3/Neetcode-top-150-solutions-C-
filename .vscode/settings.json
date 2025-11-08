@@ -50,6 +50,7 @@
         "variant": "cpp",
         "memory": "cpp",
         "complex": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "tuple": "cpp"
     }
 }
