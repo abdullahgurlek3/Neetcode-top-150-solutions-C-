@@ -1,5 +1,5 @@
 test: 
-	g++ -g ${q}.cpp
+	g++ -g ${q}.cpp 
 
 run:
 	./a.out

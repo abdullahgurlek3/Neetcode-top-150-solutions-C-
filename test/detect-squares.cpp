@@ -1,24 +1,24 @@
 #include "iostream"
 #include "helper.h"
+
 class DetectSquares
 {
 public:
     vector<vector<int>> points;
+
     void add(vector<int> point)
     {
         points.push_back(point);
-        sort(points.begin(), points.end());
+        sort(point.begin(), point.end());
     }
 
     int count(vector<int> point)
     {
-        for (int i = 0; i < points.size(); i++)
+        for (vector<int> p : points)
         {
-            for (int j = 0; j < points.size(); j++)
-            {
-
-            }
+            
         }
+        return 1;
     }
 };
 

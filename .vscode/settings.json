@@ -51,6 +51,8 @@
         "memory": "cpp",
         "complex": "cpp",
         "sstream": "cpp",
-        "tuple": "cpp"
+        "tuple": "cpp",
+        "ostream": "cpp",
+        "version": "cpp"
     }
 }

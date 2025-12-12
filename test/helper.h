@@ -14,6 +14,17 @@ void print_v(vector<T> v)
 }
 
 template <typename T>
+void print_d(deque<T> v)
+{
+    for (int i = 0; i < v.size(); i++)
+    {
+        cout << v[i] << " ";
+    }
+    cout << endl;
+}
+
+
+template <typename T>
 void print_matrix(vector<vector<T>> v)
 {
     for (int y = 0; y < v.size(); y++)
@@ -67,6 +78,30 @@ void print_ar(T ar[], int s)
     {
         cout << ar[i] << " ";
     }
+}
+
+template <typename T>
+void print(T a)
+{
+    cout << a << endl;
+}
+
+template <typename T>
+void print(T a, T b)
+{
+    cout << a << ", " << b << endl;
+}
+
+template <typename T>
+void print(T a, T b, T c)
+{
+    cout << a << ", " << b << ", " << c << endl;
+}
+
+template <typename T>
+void print(T a, T b, T c, T d)
+{
+    cout << a << ", " << b << ", " << c << ", " << d << endl;
 }
 
 vector<vector<int>> &convertStrToMatrix(string str)
