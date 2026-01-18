@@ -40,7 +40,7 @@ public:
         return mx;
     }
 };
- */
+
 
 class Solution
 {
@@ -90,16 +90,48 @@ public:
         return 1;
     };
 };
+ */
+
+class Solution
+{
+public:
+    int networkDelayTime(vector<vector<int>> &times, int n, int k)
+    {
+        vector<int> v(n + 1, INT_MAX);
+        v[k] = 0;
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < times.size(); j++)
+            {
+                vector<int> current = times[j];
+                int source = current[0];
+                int target = current[1];
+                int w = current[2];
+                if (v[source] != INT_MAX && v[source] + w < v[target])
+                {
+                    v[target] = v[source] + w;
+                }
+            }
+        }
+        int mn = 0;
+
+        for (int i = 1; i < n + 1; i++)
+        {
+
+            mn = max(mn, v[i]);
+        }
+
+        return mn == INT_MAX ? -1 : mn;
+    }
+};
+
 int main()
 {
     Solution s;
 
     vector<vector<int>> v = {
         {1, 2, 1},
-        {2, 3, 3},
-        {3, 4, 5},
-        {4, 5, 2},
     };
 
-    cout << (s.networkDelayTime(v, 5, 1));
+    cout << (s.networkDelayTime(v, 2, 1));
 }

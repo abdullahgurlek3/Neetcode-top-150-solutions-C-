@@ -5,20 +5,17 @@
 class Solution
 {
 public:
-    static bool sf(vector<int> a, vector<int> b)
-    {
-        return abs(a[0] - b[0]) > 0;
-    }
-
     int minCostConnectPoints(vector<vector<int>> &points)
     {
-        sort(points.begin(), points.end(), sf);
-        int ret = 0;
-        for (int i = 1; i < points.size(); i++)
+        for (int i = 0; i < points.size(); i++)
         {
-            ret += abs(points[i][1] - points[i - 1][1]) + abs(points[i][0] - points[i - 1][0]);
+            for (int j = i + 1; j < points.size(); j++)
+            {
+                int m = abs(points[j][0] - points[i][0]) + abs(points[j][1] - points[i][1]);
+                
+            }
+            
         }
-        return ret;
     }
 };
 
